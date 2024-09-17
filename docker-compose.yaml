@@ -1,0 +1,15 @@
+version: "3.7"
+services:
+  rasa:
+    # image: user/rasa
+    build: ./rasa
+    ports:
+      - 5005:5005
+    command:
+      - run
+
+  rasa-ui:
+    # image: user/rasa-ui
+    build: ./RasaUI
+    ports:
+      - 80:80 
