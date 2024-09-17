@@ -11,9 +11,9 @@ jobs:
       matrix:
         include:
           - context: ./rasa/
-            image: ghcr.io/username/rasa
+            image: ghcr.io/shestera/architecture-sprint-5:rasa
           - context: ./RasaUI/
-            image: ghcr.io/username/rasa-ui
+            image: ghcr.io/shestera/architecture-sprint-5:rasa-ui
     steps:
       - name: Checkout
         uses: actions/checkout@v4
