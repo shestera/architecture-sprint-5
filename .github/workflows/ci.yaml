@@ -11,9 +11,9 @@ jobs:
       matrix:
         include:
           - context: ./rasa/
-            image: ghcr.io/shestera/architecture-sprint-5:rasa
+            image: ghcr.io/shestera/architecture-sprint-5:rasa-latest
           - context: ./RasaUI/
-            image: ghcr.io/shestera/architecture-sprint-5:rasa-ui
+            image: ghcr.io/shestera/architecture-sprint-5:rasa-ui-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -27,17 +27,11 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-      - name: Extract metadata (tags, labels) for Docker
-        id: meta
-        uses: docker/metadata-action@v5
-        with:
-          images: ${{ matrix.image }}
       - name: Build and push
         uses: docker/build-push-action@v6
         with:
           context: ${{ matrix.context }}
           push: true
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
+          tags: ${{ matrix.image }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
